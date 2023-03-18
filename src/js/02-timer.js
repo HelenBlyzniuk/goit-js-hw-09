@@ -13,22 +13,28 @@ const options = {
     console.log(selectedDates[0]);
   },
 };
-let chosenDate = flatpickr(inputEl, options);
+
+let calendar = flatpickr(inputEl, options);
+// const chosenDate = options.defaultDate;
+// console.log(chosenDate);
+// let date = flatpickr.onClose;
+// console.log(date);
+
 inputEl.addEventListener('click', onSelectedDate);
 
 function onSelectedDate(e) {
     e.preventDefault();
     let clickedDate = flatpickr.onClose;
-    
+  let currentDate = options.defaultDate;
+  
+  // currentDate.getTime();
+  // clickedDate.getTime();
+  console.log(clickedDate.getTime());
+  console.log(currentDate.getTime());
    
-    
-    const currentDate = new Date();
-    
-    console.log(clickedDate);
-    console.log(clickedDate - currentDate);
-    if (clickedDate - currentDate < 0) {
-        window.alert("Please choose a date in the future");  
-    }
+    // if (clickedDate - currentDate < 0) {
+    //     window.alert("Please choose a date in the future");  
+    // }
    
 };
 
