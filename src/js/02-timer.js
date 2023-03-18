@@ -24,7 +24,7 @@ inputEl.addEventListener('click', onSelectedDate);
 
 function onSelectedDate(e) {
     e.preventDefault();
-    let clickedDate = flatpickr.onClose;
+  let clickedDate = flatpickr.onClose;
   let currentDate = options.defaultDate;
   
   // currentDate.getTime();
