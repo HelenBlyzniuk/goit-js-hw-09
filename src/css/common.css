@@ -17,3 +17,47 @@ img {
   max-width: 100%;
 }
 
+
+.textarea{
+  margin-left: 50px;
+  display: flex;
+  gap: 50px;
+}
+
+#datetime-picker{
+  display:block;
+  padding-left: 30px;
+  width:250px;
+  height: 50px;
+  font-size: 20px;
+    font-weight: bold;
+    border-radius: 10%;
+    border-color: aliceblue;
+}
+
+button{
+display: block;
+  width: 250px;
+  height: 50px;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 10%;
+    border-color:aliceblue;
+    color:black;
+    background-color: aquamarine;
+    
+}
+.timer{
+  display:flex;
+  gap:50px;
+  font-size:20px;
+  font-weight: bold;
+  margin-top:50px;
+  margin-left:50px;
+  
+}
+
+.value{
+  color:aqua;
+  font-size: 30px;
+}
