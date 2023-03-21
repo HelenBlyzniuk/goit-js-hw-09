@@ -1,2 +1,0 @@
-document.querySelector(".form");const e=document.querySelector('input[name="delay"]'),t=document.querySelector('input[name="step"]');console.log(t);const n=document.querySelector('input[name="amount"]');let u=null,l=null,o=null;e.addEventListener("input",(e=>(e.preventDefault,u=e.currentTarget.value,console.log(u),u))),t.addEventListener("input",(e=>(e.preventDefault,l=e.currentTarget.value,console.log(l),l))),n.addEventListener("input",(e=>(e.preventDefault,o=e.currentTarget.value,console.log(o),o)));
-//# sourceMappingURL=03-promises.82771ffe.js.map
