@@ -6,6 +6,7 @@ let figures = {};
 
 formEl.addEventListener('input', onFormInput);
 function onFormInput(e) {
+  e.preventDefault();
   figures.amount = document.querySelector('input[name="amount"]').value;
   
   figures.delay = document.querySelector('input[name="delay"]').value;
@@ -32,6 +33,8 @@ function createPromise({ position, delay }) {
 
 let position = 0;
 let delay = figures.delay;
+
+
 function callPromise(figures) {
   const { amount, step, delay } = figures;
   console.log(amount, step, delay);
@@ -40,19 +43,23 @@ function callPromise(figures) {
     delay += step;
     console.log(position);
    
-createPromise({ position, delay })
+    
+    createPromise({ position, delay })
   .then(({ position, delay }) => {
     console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
   })
   .catch(({ position, delay }) => {
     console.log(`❌ Rejected promise ${position} in ${delay}ms`);
   });
+   }
+} 
 
-  }
-}
+
+ 
 btnSubmit.addEventListener('submit', onFormSubmit);
 
 function onFormSubmit(e) {
+  e.preventDefault();
   callPromise();
 }
 
