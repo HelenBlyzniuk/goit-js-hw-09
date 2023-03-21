@@ -1,51 +1,52 @@
 
 const formEl = document.querySelector('.form');
-const delayEl = document.querySelector('input[name="delay"]');
-const stepEl = document.querySelector('input[name="step"]');
-console.log(stepEl)
-const amountEl = document.querySelector('input[name="amount"]');
-// console.log(delayEl.value);
+const btnSubmit = document.querySelector('button[type="submit"]');
+
 
 function createPromise(position, delay) {
-  const shouldResolve = Math.random() > 0.3;
-  if (shouldResolve) {
-    resolve (`✅ Fulfilled promise ${position} in ${delay}ms`);
-  } else {
-    reject(`❌ Rejected promise ${position} in ${delay}ms`);
+
+  return new Promise((resolve, reject) => {
+    const shouldResolve = Math.random() > 0.3;
+  
+    setTimeout(() => {
+      if (shouldResolve) {
+        resolve(`✅ Fulfilled promise ${position} in ${delay}ms`);
+      } else {
+        reject(`❌ Rejected promise ${position} in ${delay}ms`);
+      }
+    }, delay);
+  })
+};
+
+// Promise(position, delay).then(result).catch(error);
+
+btnSubmit.addEventListener('submit', onFormSubmit);
+
+function onFormSubmit(e) {
+  callPromise();
+}
+
+function callPromise({ amount, step }) {
+  let position = 0;
+  for (i = 0; i <= amount; i++){
+    position = i;
+    delay += step;
+    return createPromise(position, delay);
+    
   }
 }
 
-// function callPromise(amount, step) {
+
+let figures = {};
+
+formEl.addEventListener('input', onFormChange);
+function onFormChange(e) {
+  figures.amount = document.querySelector('input[name="amount"]').value;
   
-//   for (let i = 0, i <= amount, i ++){
-//     createPromise(i, delay);
-//   }
-// }
-let delay = null;
-let step = null;
-let amount = null;
+  figures.delay = document.querySelector('input[name="delay"]').value;
+  figures.step = document.querySelector('input[name="step"]').value;
+  console.log(figures);
+}
 
-delayEl.addEventListener('input', (e) => {
-  e.preventDefault;
-  delay = e.currentTarget.value;
-  console.log(delay)
-  return delay;
-});
-
-stepEl.addEventListener('input', (e) => {
-  e.preventDefault;
-  step = e.currentTarget.value;
-  console.log(step);
-  return step;
-});
-
-amountEl.addEventListener('input', (e) => {
-  e.preventDefault;
-  amount = e.currentTarget.value;
-    console.log(amount);
-  return amount;
-
-});
-
-
+console.log(figures);
 
