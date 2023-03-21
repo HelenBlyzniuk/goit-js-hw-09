@@ -2,8 +2,20 @@
 const formEl = document.querySelector('.form');
 const btnSubmit = document.querySelector('button[type="submit"]');
 
+let figures = {};
 
-function createPromise(position, delay) {
+formEl.addEventListener('input', onFormInput);
+function onFormInput(e) {
+  figures.amount = document.querySelector('input[name="amount"]').value;
+  
+  figures.delay = document.querySelector('input[name="delay"]').value;
+  figures.step = document.querySelector('input[name="step"]').value;
+  console.log(figures);
+}
+
+console.log(figures);
+
+function createPromise( position, delay) {
 
   return new Promise((resolve, reject) => {
     const shouldResolve = Math.random() > 0.3;
@@ -18,6 +30,26 @@ function createPromise(position, delay) {
   })
 };
 
+let position = 0;
+let delay = figures.delay;
+function callPromise(figures) {
+  const { amount, step, delay } = figures;
+  console.log(amount, step, delay);
+  for (i = 0; i <= amount; i++){
+    position = i;
+    delay += step;
+    createPromise(position, delay);
+    
+  }
+}
+
+createPromise({ position, delay })
+  .then(({ position, delay }) => {
+    console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
+  })
+  .catch(({ position, delay }) => {
+    console.log(`❌ Rejected promise ${position} in ${delay}ms`);
+  });
 // Promise(position, delay).then(result).catch(error);
 
 btnSubmit.addEventListener('submit', onFormSubmit);
@@ -26,27 +58,8 @@ function onFormSubmit(e) {
   callPromise();
 }
 
-function callPromise({ amount, step }) {
-  let position = 0;
-  for (i = 0; i <= amount; i++){
-    position = i;
-    delay += step;
-    return createPromise(position, delay);
-    
-  }
-}
 
 
-let figures = {};
 
-formEl.addEventListener('input', onFormChange);
-function onFormChange(e) {
-  figures.amount = document.querySelector('input[name="amount"]').value;
-  
-  figures.delay = document.querySelector('input[name="delay"]').value;
-  figures.step = document.querySelector('input[name="step"]').value;
-  console.log(figures);
-}
 
-console.log(figures);
 
