@@ -2,19 +2,34 @@
 const formEl = document.querySelector('.form');
 const btnSubmit = document.querySelector('button[type="submit"]');
 
-let figures = {};
+const amountRef = document.querySelector('input[name="amount"]');
+const delayRef = document.querySelector('input[name="delay"]');
+const stepRef = document.querySelector('input[name="step"]');
 
-formEl.addEventListener('input', onFormInput);
-function onFormInput(e) {
+
+
+formEl.addEventListener('submit', onFormSubmit);
+function onFormSubmit(e) {
   e.preventDefault();
-  figures.amount = document.querySelector('input[name="amount"]').value;
-  
-  figures.delay = document.querySelector('input[name="delay"]').value;
-  figures.step = document.querySelector('input[name="step"]').value;
-  console.log(figures);
+  const amount = Number(amountRef.value);
+  let delay = Number(delayRef.value);
+  const step = Number(stepRef.value);
+ 
+
+  for (let position = 1; position <= amount; position += 1){
+    createPromise({ position, delay })
+  .then(({ position, delay }) => {
+    console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
+  })
+  .catch(({ position, delay }) => {
+    console.log(`❌ Rejected promise ${position} in ${delay}ms`);
+  });
+    
+    delay += step;
+  }
 }
 
-console.log(figures);
+
 
 function createPromise({ position, delay }) {
 
@@ -23,45 +38,20 @@ function createPromise({ position, delay }) {
   
     setTimeout(() => {
       if (shouldResolve) {
-        resolve(`✅ Fulfilled promise ${position} in ${delay}ms`);
+        resolve({position, delay});
       } else {
-        reject(`❌ Rejected promise ${position} in ${delay}ms`);
+        reject({position, delay});
       }
     }, delay);
   })
 };
 
-let position = 0;
-let delay = figures.delay;
 
 
-function callPromise(figures) {
-  const { amount, step, delay } = figures;
-  console.log(amount, step, delay);
-  for (i = 0; i <= amount; i++){
-    position = i;
-    delay += step;
-    console.log(position);
-   
-    
-    createPromise({ position, delay })
-  .then(({ position, delay }) => {
-    console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
-  })
-  .catch(({ position, delay }) => {
-    console.log(`❌ Rejected promise ${position} in ${delay}ms`);
-  });
-   }
-} 
+
 
 
  
-formEl.addEventListener('submit', onFormSubmit);
-
-function onFormSubmit(e) {
-  e.preventDefault();
-  callPromise();
-}
 
 
 
