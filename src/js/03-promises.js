@@ -56,7 +56,7 @@ function callPromise(figures) {
 
 
  
-btnSubmit.addEventListener('submit', onFormSubmit);
+formEl.addEventListener('submit', onFormSubmit);
 
 function onFormSubmit(e) {
   e.preventDefault();
