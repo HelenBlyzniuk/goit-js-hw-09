@@ -15,7 +15,7 @@ function onFormInput(e) {
 
 console.log(figures);
 
-function createPromise( position, delay) {
+function createPromise({ position, delay }) {
 
   return new Promise((resolve, reject) => {
     const shouldResolve = Math.random() > 0.3;
@@ -38,11 +38,8 @@ function callPromise(figures) {
   for (i = 0; i <= amount; i++){
     position = i;
     delay += step;
-    createPromise(position, delay);
-    
-  }
-}
-
+    console.log(position);
+   
 createPromise({ position, delay })
   .then(({ position, delay }) => {
     console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
@@ -50,8 +47,9 @@ createPromise({ position, delay })
   .catch(({ position, delay }) => {
     console.log(`❌ Rejected promise ${position} in ${delay}ms`);
   });
-// Promise(position, delay).then(result).catch(error);
 
+  }
+}
 btnSubmit.addEventListener('submit', onFormSubmit);
 
 function onFormSubmit(e) {
